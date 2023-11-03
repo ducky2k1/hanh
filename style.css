@@ -1,0 +1,39 @@
+.container-content{
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+}
+label{
+    width: 105px;
+    border-right: 1px solid black;
+    background-color: aliceblue;
+    height: 50px;
+}
+.ha{
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+form{
+    width: 500px;
+}
+body{
+    display: flex;
+    justify-content: center;
+}
+.button-container{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button{
+    width: 70px;
+    height: 30px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: silver;
+    color: azure;
+}
+button:hover{
+    background-color: aquamarine;
+}
