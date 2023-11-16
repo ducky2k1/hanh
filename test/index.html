@@ -1,55 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Search with AJAX</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
         }
-        
-        td, th {
-          border: 1px solid #dddddd;
-          text-align: left;
-          padding: 8px;
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
         }
-        
+
         tr:nth-child(even) {
-          background-color: #dddddd;
+            background-color: #dddddd;
         }
-        </style>
+    </style>
 </head>
+
 <body>
     <h1>Search Users</h1>
     <input type="text" id="searchInput" placeholder="Enter username">
+    <select id="roleSelect">
+        <option value="none"></option>
+        <option value="all">All</option>
+        <option value="lt">lt</option>
+        <option value="mt">mt</option>
+    </select>
     <button onclick="search()">Search</button>
     <div id="searchResult"></div>
 
-
     <script>
         function search() {
+            // Lấy giá trị nhập vào trong ô tìm kiếm
             var searchTerm = $('#searchInput').val();
 
-            if (searchTerm.trim() === "") {
-                alert("Please enter a username.");
-                return;
-            }
+            // Lấy giá trị được chọn từ phần tử dropdown (select) có ID là 'roleSelect'
+            var selectedRole = $('#roleSelect').val();
 
+            // Sử dụng AJAX để gửi một yêu cầu đến máy chủ để thực hiện tìm kiếm
             $.ajax({
-                type: 'POST',
-                url: 'search.php', // Đường dẫn đến file xử lý tìm kiếm trên server
-                data: { search: searchTerm },
-                success: function(response) {
+                type: 'POST',                       // Phương thức HTTP cho yêu cầu
+                url: 'search.php',                  // Đường dẫn đến tập lệnh phía máy chủ xử lý yêu cầu
+                data: { search: searchTerm, role: selectedRole }, // Dữ liệu sẽ được gửi đến máy chủ
+                success: function (response) {       // Hàm gọi lại để xử lý khi có phản hồi thành công
+                    // Cập nhật nội dung của phần tử HTML có ID là 'searchResult'
                     $('#searchResult').html(response);
                 },
-                error: function(xhr, status, error) {
-                    console.error("AJAX request failed:", status, error);
+                error: function (xhr, status, error) { // Hàm gọi lại để xử lý lỗi
+                    // Ghi một thông báo lỗi ra console
+                    console.error("Yêu cầu AJAX thất bại:", status, error);
                 }
             });
+            console.log("Search Term: " + searchTerm);
+console.log("Selected Role: " + selectedRole);
+
         }
     </script>
 </body>
+
 </html>
