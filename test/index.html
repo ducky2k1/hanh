@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search with AJAX</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+    <h1>Search Users</h1>
+    <input type="text" id="searchInput" placeholder="Enter username">
+    <button onclick="search()">Search</button>
+    <div id="searchResult"></div>
+
+
+    <script>
+        function search() {
+            var searchTerm = $('#searchInput').val();
+
+            if (searchTerm.trim() === "") {
+                alert("Please enter a username.");
+                return;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: 'search.php', // Đường dẫn đến file xử lý tìm kiếm trên server
+                data: { search: searchTerm },
+                success: function(response) {
+                    $('#searchResult').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX request failed:", status, error);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

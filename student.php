@@ -17,7 +17,7 @@
             <div class="container-content">
                 <label for="" style="width: 105px;">Họ và tên</label>
                 <div class="ha">
-                    <input type="text" name="hovaten" id="hovaten" required>
+                    <input type="text" name="hovaten" id="hovaten" required style="height: 100%;width:100%;">
                 </div>
             </div>
             <!-- Input Box - Gender -->
